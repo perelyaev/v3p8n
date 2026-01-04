@@ -6,25 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "email": "email dev"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
+    "@react-email/components": "1.0.3",
     "better-auth": "^1.4.10",
     "dotenv": "^17.2.3",
     "next": "16.1.1",
+    "nodemailer": "^7.0.12",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@react-email/preview-server": "5.1.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20.19.27",
+    "@types/nodemailer": "^7.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "prisma": "^7.2.0",
+    "react-email": "5.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
