@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Auth } from '@/components/elements/auth'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,6 +25,7 @@ export default function RootLayout({
         <footer>
 
         </footer>
+        <Toaster />
       </body>
     </html>
   );

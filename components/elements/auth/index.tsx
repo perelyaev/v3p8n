@@ -12,7 +12,7 @@ export function Auth() {
     } = authClient.useSession()
 
   if (!session) {
-    return <Button type='button' variant='outline' onClick={() => redirect('sign-in')}>Войти</Button>
+    return <Button type='button' onClick={() => redirect('sign-in')}>Войти</Button>
   }
 
   return <Button>Выйти</Button>
