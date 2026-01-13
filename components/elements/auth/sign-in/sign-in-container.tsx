@@ -2,7 +2,7 @@
 import * as z from "zod"
 import { toast } from 'sonner'
 import { useState } from 'react'
-import { SendVerificationOtpCard, TSendVerificationOtpCardInput } from './email-otp/send-verification-otp-card'
+import { SendVerificationOtpCard } from './email-otp/send-verification-otp-card'
 
 const schema = z.object({
   email: z
@@ -10,39 +10,41 @@ const schema = z.object({
 })
 
 export function SignInContainer() {
-  const [email, setEmail] = useState<TSendVerificationOtpCardInput>({
-    value: '',
-    isError: false
-  })
+  const [email, setEmail] = useState<string>('')
+  const [isError, setIsError] = useState<boolean>(false)
+  const [isSend, setIsSend] = useState<boolean>(false)
+
+  function validateInput() {
+    const result = schema.safeParse({ email})
+    if (!result.success) {
+      setIsError(true)
+      if (!isError) {result.error.issues.map((e) => toast.error(e.message))}
+    } else {
+      setIsError(false)
+      toast.success('Верный адрес электронной почты')
+    }
+  }
 
   function handleSendVirificationOtp() {
-    const result = schema.safeParse({email});
+    const result = schema.safeParse({ email })
     if (!result.success) {
-      setEmail({
-        ...email,
-        isError: true
-      })
+      setIsError(true)
       result.error.issues.map((e) => toast.error(e.message))
     } else {
-      setEmail({
-        ...email,
-        isError: false
-      })
+      setIsError(false)
       console.log(result.data.email)
     }
   }
 
   return (
         <SendVerificationOtpCard 
-          value={email.value}
-          isError={email.isError}
+          value={email}
+          aria-invalid={isError}
           onChange={e => {
-            setEmail({
-              ...email,
-              value: e.target.value
-            })
+            setEmail(e.target.value)
+            validateInput()
           }}
-          onClick={handleSendVirificationOtp}
+          onClickButton={handleSendVirificationOtp}
         />
   )
 }
