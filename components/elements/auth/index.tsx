@@ -1,19 +1,14 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { authClient } from '@/lib/auth-client'
-import { redirect } from 'next/navigation'
+import { SignIn } from './sign-in'
 
 export function Auth() {
-  const { 
-        data: session, 
-        isPending, //loading state
-        error, //error object
-        refetch //refetch the session
-    } = authClient.useSession()
+  const { data: session } = authClient.useSession()
 
   if (!session) {
-    return <Button type='button' onClick={() => redirect('sign-in')}>Войти</Button>
+    return <SignIn />
   }
 
-  return <Button>Выйти</Button>
+  return <Button>Профиль</Button>
 }
